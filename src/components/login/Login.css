@@ -1,0 +1,52 @@
+.login-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.login-card {
+    margin-top: 2rem;
+    height: 40rem;
+    width: 25%;
+    margin-top: 5%;
+}
+
+.login-image {
+    height: 40rem;
+    width: 30rem;
+}
+
+.typography-text {
+    text-align: center;
+}
+
+.imgcar {
+    position: relative;
+    top: 1rem;
+    height: 40rem;
+    width: 30rem;
+}
+
+.car {
+    position: absolute;
+    top: 6.4rem;
+    height: 40rem;
+    left:9.8rem;
+    width: 16.2rem;
+}
+
+@media screen and (max-width:436px) {
+    .login-wrapper{
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+    .login-card{
+        width: 25rem;
+        height: 30rem;
+    }
+    .imgcar{
+        margin: 0;
+        top: 0;
+    }
+
+}
