@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useContext } from 'react'
+import React, { Component, useState, useEffect, useContext,useRef } from 'react'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -16,22 +16,27 @@ import { Link,useNavigate } from 'react-router-dom'
 import {AuthContextProvider} from '../context/AuthProvider'
 import { storage , database } from '../firebase/FirebaseSetup';
 
+
 function SignUp() {
-    
     const [email, setEmail]         = useState('')
     const [password, setPassword]   = useState('')
     const [fullName, setFullName]   = useState('')
     const [file,setFile]            = useState(null)
     const [error,setError]          = useState('')
     const [loading,setLoading]      = useState(false)
-    const {signUp} = useContext(AuthContextProvider)
+    const {signUp,setUser} = useContext(AuthContextProvider)
     const navigate = useNavigate()
+    const inputRef = useRef()
     const styles = ({
         text1: {
             color: 'grey',
             textAlign: 'center'
         }
     })
+
+    let handleUploadProfilePic = ()=>{
+        inputRef.current.click()
+    }
  
     let handleSignUp = async ()=>{
         if(file==null){
@@ -46,7 +51,8 @@ function SignUp() {
             let uuid = userObj.user.uid
             let uploadTask = storage.ref(`/users/${uuid}/profileImage`).put(file)
             let imageUploadSuccess=async ()=>{
-                uploadTask.snapshot.ref.getDownloadURL().then((url)=>{
+                uploadTask.snapshot.ref.getDownloadURL()
+                .then((url)=>{
                     console.log(url)
                     database.users.doc(`${uuid}`).set({
                         email:email,
@@ -56,8 +62,16 @@ function SignUp() {
                         createdAt:database.getTimeStamp()
                     })    
                 })
-                setLoading(false)
-                navigate('/')
+                .then(()=>{
+                     database.users.doc(uuid).get().then((doc)=>{
+                        console.log("user"+JSON.stringify(doc.data()) )
+                        setUser(doc.data())
+                        setLoading(false)
+                        navigate('/')
+                      })
+    
+                })
+                
             }
             let imageUploadLoading=(snapshot)=>{
                 let progress = (snapshot.bytesTransferred/snapshot.totalBytes)*100
@@ -96,9 +110,9 @@ function SignUp() {
                         <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin="dense" size="small" value={password} onChange={(e) => setPassword(e.target.value)} />
                         <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" value={fullName} onChange={(e) => setFullName(e.target.value)} />
                         <CardActions>
-                            <Button margin="dense" variant="outlined" color="secondary" fullWidth={true}>
+                            <Button margin="dense" variant="outlined" color="secondary" fullWidth={true} onClick={handleUploadProfilePic}>
                                 Upload Profile Image
-                                <input type='file'  accept='image/*' onChange={(e)=>{setFile(e.target.files[0])}} />
+                                <input ref={inputRef} hidden type='file'  accept='image/*'  onChange={(e)=>{setFile(e.target.files[0])}} />
                             </Button>
                         </CardActions>
                         <CardActions>

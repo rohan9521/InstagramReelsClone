@@ -3,8 +3,8 @@ import { auth } from '../firebase/FirebaseSetup'
 
 export const AuthContextProvider = createContext('')
 export function AuthProvider({children}) {
-   
     const [user, setUser] = useState('')
+    const [authUser, setAuthUser] = useState('')
     const [loading, setLoading] = useState(true)
 
     let signUp = (email,password)=>{
@@ -16,10 +16,15 @@ export function AuthProvider({children}) {
     let signOut =()=>{
         return auth.signOut();
     }
-
+    let setCurrUser = (user)=>{
+        setUser(user)
+    }
+    let getCurrUser = ()=>{
+        return user
+    }
     useEffect(() => {
         const unsub = auth.onAuthStateChanged((user) => {
-            setUser(user)
+            setAuthUser(user)
             setLoading(false)
         })
         return ()=>{
@@ -28,10 +33,12 @@ export function AuthProvider({children}) {
     })
 
     const store = {
-        user,
+        authUser,
         signIn,
         signUp,
-        signOut
+        signOut,
+        setUser,
+        user
     }
 
     return (
