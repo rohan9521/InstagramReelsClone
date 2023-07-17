@@ -24,7 +24,7 @@ function Login() {
     const [password, setPassword]   = useState('')
     const [error, setError]         = useState('')
     const [loading,setLoading]      = useState('')
-    const {signIn} = useContext(AuthContextProvider)
+    const {signIn,authUser} = useContext(AuthContextProvider)
     const navigate = useNavigate()
 
     const styles = ({
@@ -39,7 +39,7 @@ function Login() {
             setLoading(true)
             await signIn(email,password)
             setLoading(false)
-            navigate('/')
+             navigate('/')
         }catch(err){
             setTimeout(()=>{
                 setError(error)

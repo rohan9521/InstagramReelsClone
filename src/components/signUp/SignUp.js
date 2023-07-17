@@ -24,7 +24,7 @@ function SignUp() {
     const [file,setFile]            = useState(null)
     const [error,setError]          = useState('')
     const [loading,setLoading]      = useState(false)
-    const {signUp,setUser} = useContext(AuthContextProvider)
+    const {signUp,setCurrUser} = useContext(AuthContextProvider)
     const navigate = useNavigate()
     const inputRef = useRef()
     const styles = ({
@@ -39,6 +39,7 @@ function SignUp() {
     }
  
     let handleSignUp = async ()=>{
+       
         if(file==null){
             setError("Please Upload Profile Picture")
             setTimeout(()=>{
@@ -46,12 +47,18 @@ function SignUp() {
             },2000)
             return 
         }
+        console.log("signup")
         try{
             let userObj = await signUp(email,password)
+            console.log("err0")
             let uuid = userObj.user.uid
             let uploadTask = storage.ref(`/users/${uuid}/profileImage`).put(file)
+            console.log("err1")
             let imageUploadSuccess=async ()=>{
-                uploadTask.snapshot.ref.getDownloadURL()
+                uploadTask
+                .snapshot
+                .ref
+                .getDownloadURL()
                 .then((url)=>{
                     console.log(url)
                     database.users.doc(`${uuid}`).set({
@@ -63,13 +70,8 @@ function SignUp() {
                     })    
                 })
                 .then(()=>{
-                     database.users.doc(uuid).get().then((doc)=>{
-                        console.log("user"+JSON.stringify(doc.data()) )
-                        setUser(doc.data())
                         setLoading(false)
                         navigate('/')
-                      })
-    
                 })
                 
             }
@@ -81,7 +83,7 @@ function SignUp() {
                 setError(error)
             }
             uploadTask.on('state_changed',imageUploadLoading,imageUploadError,imageUploadSuccess)
-          
+            console.log("err")
 
         }catch(err){
             console.log(err)
@@ -90,19 +92,22 @@ function SignUp() {
     }
     return (
         <div className='signupwrapper'>
+          
             <div className='signupcard'>
                 <Card variant="outlined">
                     <div class='insta-logo'>
                         <img src={insta} />
+                       { console.log("asd")}
                     </div>
                     <CardContent>
                         <Typography className={styles.text1}>
+                            
                             Sign up to see photos and videos from your friends
                         </Typography>
                         <Typography className={styles.text1}>
                             {
                                 error!="" && <Alert variant="outlined" severity="error">
-                                   {error}
+                                   {error} 
                                 </Alert>
                             }
                         </Typography>

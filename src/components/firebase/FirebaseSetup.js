@@ -11,13 +11,13 @@ import 'firebase/compat/firestore'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDkL8ocxBgvrqcPFIiutpfGmjoxLqzUaW8",
-  authDomain: "instagramreelsclone-ae8c1.firebaseapp.com",
-  projectId: "instagramreelsclone-ae8c1",
-  storageBucket: "instagramreelsclone-ae8c1.appspot.com",
-  messagingSenderId: "1057776908028",
-  appId: "1:1057776908028:web:d0b466dbf1473d85d30979",
-  measurementId: "G-DMW0BQ07F7"
+  apiKey: "AIzaSyB2q5bpFi-8XSpQjYedbk4IO-zpGF-4wfs",
+  authDomain: "instagram-clone-2e2bd.firebaseapp.com",
+  projectId: "instagram-clone-2e2bd",
+  storageBucket: "instagram-clone-2e2bd.appspot.com",
+  messagingSenderId: "472607049619",
+  appId: "1:472607049619:web:a4992a0f3dc1081e30ca66",
+  measurementId: "G-7TFKPJMRHW"
 };
 
 // Initialize Firebase

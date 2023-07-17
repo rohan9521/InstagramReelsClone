@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert'
 import { useNavigate } from 'react-router-dom';
 
 function UploadFile(props) {
-  console.log(JSON.stringify(props))
+  
   const [currUser, setCurrUser] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -36,6 +36,7 @@ function UploadFile(props) {
       }, 2000)
     }
     let uuid = uuidv4()
+    console.log(`${uuid}`)
     let uploadTask = storage.ref(`/posts/${uuid}/${file.name}`).put(file)
     let imageUploadSuccess = async () => {
 
@@ -81,16 +82,20 @@ function UploadFile(props) {
 
   }
   return (
-    <div>
+    <div style={{
+      display:'flex',
+      flexDirection:'column',
+      justifyContent:'start',
+      alignItems:'center'
+      }}>
       {error != "" &&
         <Alert variant="outlined" severity="error">
           {error}
         </Alert>
       }
-      <Button margin="dense" variant="outlined" color="secondary" fullWidth={false} onClick={() => { inputReelsRef.current.click() }}>
+      <Button  margin="dense" variant="outlined" color="secondary" fullWidth={false} onClick={() => { inputReelsRef.current.click() }}>
         Upload reels
         <input ref={inputReelsRef} hidden type='file' accept='video/*' onChange={(e) => { handleUploadReel(e.target.files[0]) }} />
-
       </Button>
       {loading && <LinearProgress color="secondary" style={{ width: 100 }} />}
     </div>

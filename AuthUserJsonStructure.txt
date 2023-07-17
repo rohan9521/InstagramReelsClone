@@ -1,0 +1,25 @@
+{
+  "uid": "qO7uerLFHDMFCCv09rev088ZjBj2",
+  "email": "asd123@gmicl.com",
+  "emailVerified": false,
+  "isAnonymous": false,
+  "providerData": [
+    {
+      "providerId": "password",
+      "uid": "asd123@gmicl.com",
+      "displayName": null,
+      "email": "asd123@gmicl.com",
+      "phoneNumber": null,
+      "photoURL": null
+    }
+  ],
+  "stsTokenManager": {
+    "refreshToken": "APZUo0RiBdAom3j_kSdVwEy4XcW3JOMhUjy-pGOnUUjoKKVRL3pfYni135vHxG4kTuIRpmt0GKRfD1twzeZub2xfvs1_bAQrmx9PjhRkF3k5b0Gz3Uk8_-Jp0NsRSB4vOnQJs6k_YYY_1MMZtZnCeV09IKRj8wavvmLDP7nbYMMCWdXMzHI-urXOoHyOh4hFT79guFBYSlSVcnzWdPTNf3vqGx41ZJYFNBHaWU9e6VGe28kBYmdG848",
+    "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1MWJiNGJkMWQwYzYxNDc2ZWIxYjcwYzNhNDdjMzE2ZDVmODkzMmIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vaW5zdGFncmFtcmVlbHNjbG9uZS1hZThjMSIsImF1ZCI6Imluc3RhZ3JhbXJlZWxzY2xvbmUtYWU4YzEiLCJhdXRoX3RpbWUiOjE2ODkxMTU4NzYsInVzZXJfaWQiOiJxTzd1ZXJMRkhETUZDQ3YwOXJldjA4OFpqQmoyIiwic3ViIjoicU83dWVyTEZIRE1GQ0N2MDlyZXYwODhaakJqMiIsImlhdCI6MTY4OTEzNDk5NiwiZXhwIjoxNjg5MTM4NTk2LCJlbWFpbCI6ImFzZDEyM0BnbWljbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYXNkMTIzQGdtaWNsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.VcEBFiWGK9-vcU_hyQP2bxCSWYqxDhSUtDlQpM4cMK9W6f5KKM-7KETLRhUIVcLbRCLbdzWXHhd-vgpREDFCFA1GWwtG8XOgctiualmFl0YzQ7FBv3rdnfRpxlFgG1PJDwONmdCNyEBPUGujdInkCkO4jKomzyZwI30U9MYeHZHlu-pLcGZKZwCFBEfrtXsHJJA6HAQziQcbOStSzk2oGfbYMpu5sE6D1wq2JOBBd1ohpj5LJvZ0PsrsPf31DLd8_VbJSWlWFbKHaLBALa6sCutd8PNF3i3viQ2f2O4sB2zxepDOeawujvjmSpLKDU7TIy2Hq_0KmlPjAT0jj0MzIA",
+    "expirationTime": 1689138596575
+  },
+  "createdAt": "1689115875879",
+  "lastLoginAt": "1689115875879",
+  "apiKey": "AIzaSyDkL8ocxBgvrqcPFIiutpfGmjoxLqzUaW8",
+  "appName": "[DEFAULT]"
+}
