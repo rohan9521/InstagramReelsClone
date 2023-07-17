@@ -1,35 +1,34 @@
-import React, { useState, useEffect,createContext } from 'react'
-import { auth } from '../firebase/FirebaseSetup'
+import React, { useState, useEffect, createContext } from 'react'
+import { auth, database } from '../firebase/FirebaseSetup'
+import { useNavigate } from 'react-router-dom'
 
 export const AuthContextProvider = createContext('')
-export function AuthProvider({children}) {
+export function AuthProvider({ children }) {
     const [user, setUser] = useState('')
-    const [authUser, setAuthUser] = useState('')
-    const [loading, setLoading] = useState(true)
-
-    let signUp = (email,password)=>{
-        return auth.createUserWithEmailAndPassword(email,password)
+    const [authUser, setAuthUser] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+    let signUp = (email, password) => {
+        return auth.createUserWithEmailAndPassword(email, password)
     }
-    let signIn = (email,password)=>{
-        return auth.signInWithEmailAndPassword(email,password)
+    let signIn = (email, password) => {
+        return auth.signInWithEmailAndPassword(email, password)
     }
-    let signOut =()=>{
+    let signOut = () => {
         return auth.signOut();
     }
-    let setCurrUser = (user)=>{
-        setUser(user)
-    }
-    let getCurrUser = ()=>{
-        return user
-    }
+
     useEffect(() => {
         const unsub = auth.onAuthStateChanged((user) => {
-            setAuthUser(user)
-            setLoading(false)
+            if (user) {
+                console.log(`${JSON.stringify(user)}`)
+                setAuthUser(user)
+                navigate('/')
+            } else {
+                navigate('/login')
+            }
         })
-        return ()=>{
-            unsub()
-        }
+
     })
 
     const store = {
@@ -37,7 +36,6 @@ export function AuthProvider({children}) {
         signIn,
         signUp,
         signOut,
-        setUser,
         user
     }
 

@@ -1,0 +1,9 @@
+.like{
+    cursor: pointer;
+    color : #e74c3c
+}
+
+.un-like{
+    cursor: pointer;
+    color: white;
+}
