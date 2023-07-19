@@ -1,0 +1,39 @@
+.comments-styling{
+    background-color:white;
+}
+
+.modal{
+    display: flex;
+    flex-direction: row;
+    height: 80vh;
+}
+
+.comments-modal{
+    height: 80vh;
+    width: 62%;
+    
+}
+.reel-modal{
+    position: absolute;
+}
+.reel-container{
+    width: 35%;
+    margin-right: 3%;
+    position: relative;
+    border-radius: 20px;
+}
+.add-comments{
+    bottom: 2%;
+    width: 100%;
+}
+.comments-list{
+    height: 60vh;
+}
+.commentslist-container{
+    overflow-y:scroll;
+    max-height:70vh ;
+    scrollbar-width: none;
+}
+.commentslist-container::-webkit-scrollbar {
+    display: none;
+}

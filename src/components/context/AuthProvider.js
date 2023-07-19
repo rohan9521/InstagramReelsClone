@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
             }
         })
 
-    })
+    },[])
 
     const store = {
         authUser,
