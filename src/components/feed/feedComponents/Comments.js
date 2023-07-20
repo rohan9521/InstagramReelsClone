@@ -63,8 +63,8 @@ function Comments(props) {
     let handlePostComment = async () => {
         let commentObj = {
             postedBy: {
-                userName : props.user.fullname,
-                profilePicUrl : props.user.profileUrl
+                userName: props.user.fullname,
+                profilePicUrl: props.user.profileUrl
             },
             text: commentText,
             datePosted: database.getTimeStamp(),
@@ -106,15 +106,15 @@ function Comments(props) {
                                         {
 
                                             commentsList.map((comment) => (
-                                                <div style={{border:'solid blue 1px'}}>
-                                                    <p>{comment.text}</p>
-                                                   
-                                                    <div  style={{display:'flex',alignItems:'center'}}>
-                                                        <Avatar src={comment.postedBy.profilePicUrl} />
-                                                        <h4>{comment.postedBy.userName}</h4>
+                                                <div style={{ display: 'flex', alignItems: 'start',margin:'1%' }}>
+                                                    <Avatar src={comment.postedBy.profilePicUrl} />
+                                                    <div style={{backgroundColor:'lightgrey',width:'100%',padding:'0',borderRadius:'10px'}} >
+
+                                                        <h4 style={{margin:'0',padding:'0',color:'blue'}}>{comment.postedBy.userName}</h4>
+
+                                                        <p style={{margin:'0',padding:'0'}}>{comment.text}</p>
                                                         <FavoriteIcon />
                                                     </div>
-                                                    
                                                 </div>
                                             ))
                                         }
