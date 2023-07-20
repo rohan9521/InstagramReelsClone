@@ -11,7 +11,16 @@ import 'firebase/compat/firestore'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-
+const firebaseConfig = {
+  apiKey: "AIzaSyB2q5bpFi-8XSpQjYedbk4IO-zpGF-4wfs",
+  authDomain: "instagram-clone-2e2bd.firebaseapp.com",
+  databaseURL: "https://instagram-clone-2e2bd-default-rtdb.firebaseio.com",
+  projectId: "instagram-clone-2e2bd",
+  storageBucket: "instagram-clone-2e2bd.appspot.com",
+  messagingSenderId: "472607049619",
+  appId: "1:472607049619:web:a4992a0f3dc1081e30ca66",
+  measurementId: "G-7TFKPJMRHW"
+};
 // Initialize Firebase
 const app           = firebase.initializeApp(firebaseConfig);
 const analytics     = getAnalytics(app);
@@ -21,5 +30,6 @@ const firestore = firebase.firestore()
 export const database = {
   users: firestore.collection('users'),
   posts:firestore.collection('posts'),
+  comments:firestore.collection('comments'),
   getTimeStamp: firebase.firestore.FieldValue.serverTimestamp
 }

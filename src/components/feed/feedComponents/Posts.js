@@ -6,6 +6,7 @@ import Reels from './Reels';
 import './css/Posts.css'
 import Avatar from '@mui/material/Avatar';
 import Like from './Like';
+import Comments from './Comments';
 
 
 function Posts(props) {
@@ -38,8 +39,7 @@ function Posts(props) {
                     <div className='video-container'>
                     
                         {
-                            posts.map((post) => (
-                                
+                            posts.map((post) => (   
                                 <React.Fragment key={post.index}>
                                       {console.log(post.index)}
                                     <div className='video-frame'>
@@ -47,11 +47,10 @@ function Posts(props) {
                                         <div className='details' style={{ display: 'flex', alignContent: 'center' }}>
                                             <Avatar src={post.postData.userProfileImage} />
                                             <h4>{post.postData.user}</h4>
-                                          
                                             <Like className='like-styling' postData={post.postData} userData={props.user} postId={post.index} />
+                                            <Comments post={post.postData} user={props.user} postId={post.index} className='comments-styling'/>
                                         </div>
                                     </div>
-
                                 </React.Fragment>
                             ))
                         }
