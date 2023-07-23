@@ -10,7 +10,8 @@ import Comments from './Comments';
 
 
 function Posts(props) {
-    const [posts, setPosts] = useState([])
+    console.log("propsfromPosts"+JSON.stringify(props))
+    const [posts, setPosts] = useState('')
     const { user } = useContext(AuthContextProvider)
     const [loading, setLoading] = useState(true)
 
@@ -21,7 +22,7 @@ function Posts(props) {
                 console.log("DOC" + JSON.stringify(doc.data() + "id-" + doc.id))
                 let obj = { postData:{...doc.data()}, index: doc.id }
                 console.log("useEffect"+doc.id)
-                parr.push(obj)
+              parr.push(obj)
             })
             setLoading(false)
             setPosts(parr)
@@ -41,14 +42,14 @@ function Posts(props) {
                         {
                             posts.map((post) => (   
                                 <React.Fragment key={post.index}>
-                                      {console.log(post.index)}
+                                      {console.log("posts"+post.index)}
                                     <div className='video-frame'>
                                         <Reels video={post.postData.pUrl} />
                                         <div className='details' style={{ display: 'flex', alignContent: 'center' }}>
                                             <Avatar src={post.postData.userProfileImage} />
-                                            <h4>{post.postData.user}</h4>
-                                            <Like className='like-styling' postData={post.postData} userData={props.user} postId={post.index} />
-                                            <Comments post={post.postData} user={props.user} postId={post.index} className='comments-styling'/>
+                                            <h4 style={{color:'white',marginLeft:'3%'}}>{post.postData.user}</h4>
+                                            <Like style={{marginLeft:'1%'}} className='like-styling' postData={post.postData} userData={props.user} postId={post.index} />
+                                            <Comments style={{marginLeft:'1%'}} post={post.postData} user={props.user} postId={post.index} className='comments-styling'/>
                                         </div>
                                     </div>
                                 </React.Fragment>

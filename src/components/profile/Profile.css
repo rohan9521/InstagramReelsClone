@@ -1,0 +1,46 @@
+.profile-details{
+    margin-left: 10%;
+    width: 80%;
+    display: flex;
+}
+.userimage-container{
+    border-radius: 20px;
+    position: relative;
+    width: 70%;
+    height: 15rem;
+    margin-left: 15%;
+}
+.user-data{
+    border-radius: 20px;
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+   justify-content: center;
+    padding: 2%;
+}
+.user-avatar{
+    display:flex;
+    justify-content: end;
+    width:45%;
+}
+.reels-container{
+    
+    display:flex;
+    flex-wrap: wrap;
+}
+.profile-container{
+    width:80%;
+    margin-left: 10%;
+}
+.video-frame-profile{
+    position: relative;
+    margin-left: 2%;
+    height: 50vh;
+    overflow: hidden;
+    border-radius: 40px;
+}
+.comments-styling-profile{
+  
+    color:white;
+    bottom: 2%;
+}
