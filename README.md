@@ -1,12 +1,12 @@
-*Instagram-Clone
-*Features
+* Instagram-Clone
+* Features
    * Reels
    * Posts
    * Sign In
    * Sign Up
    * Sign Out
-Made using 
-   *Firebase
+* Made using 
+   * Firebase
        * firestore
        * authentication
        * storage
