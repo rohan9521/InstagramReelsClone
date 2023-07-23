@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert'
 import { useNavigate } from 'react-router-dom';
 
 function UploadFile(props) {
-  
+  console.log("propsfromUploadFile"+JSON.stringify(props))
   const [currUser, setCurrUser] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -21,7 +21,7 @@ function UploadFile(props) {
     navigate('/login')
   }
   let handleUploadReel = async (file) => {
-    console.log(file)
+    console.log("propsfromUploadFile1")
     setLoading(true)
     if (file == null) {
       setError('No file selected')
@@ -40,8 +40,9 @@ function UploadFile(props) {
     let uploadTask = storage.ref(`/posts/${uuid}/${file.name}`).put(file)
     let imageUploadSuccess = async () => {
 
-      uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+      uploadTask.snapshot.ref.getDownloadURL().then(async (url) => {
         console.log(url)
+        console.log("propsfromUploadFile2"+url)
 
         let obj = {
           likes: [],
@@ -53,10 +54,13 @@ function UploadFile(props) {
           userId: props.user.userId,
           createdAt: database.getTimeStamp()
         }
-        database.posts.add(obj).then(async (ref) => {
+        console.log("insideUploadUpdate")
+      await database.posts.add(obj).then(async (ref) => {
           let res = await database.users.doc(props.user.userId).update({
-            postIds: props.user.propIds == null ? [ref.id] : [...currUser.postIds, ref.id]
+           
+            postIds: props.user.postIds == null ? [ref.id] : [...props.user.postIds, ref.id]
           })
+        
         }).then(() => {
           setLoading(false)
         }).catch((error) => {
@@ -78,6 +82,8 @@ function UploadFile(props) {
       setError(error)
       setLoading(false)
     }
+    console.log("propsfromUploadFile3")
+
     uploadTask.on('state_changed', imageUploadLoading, imageUploadError, imageUploadSuccess)
 
   }

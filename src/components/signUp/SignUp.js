@@ -59,13 +59,14 @@ function SignUp() {
                 .snapshot
                 .ref
                 .getDownloadURL()
-                .then((url)=>{
+                .then(async (url)=>{
                     console.log(url)
-                    database.users.doc(`${uuid}`).set({
+                  await  database.users.doc(`${uuid}`).set({
                         email:email,
                         userId:uuid,
                         fullname:fullName,
                         profileUrl:url,
+                        postIds:[],
                         createdAt:database.getTimeStamp()
                     })    
                 })
@@ -112,8 +113,8 @@ function SignUp() {
                             }
                         </Typography>
                         <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin="dense" size="small" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                        <TextField id="outlined-basic" label="Password" type="password" variant="outlined" fullWidth={true} margin="dense" size="small" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth={true} margin="dense" size="small" value={fullName} onChange={(e) => setFullName(e.target.value)} />
                         <CardActions>
                             <Button margin="dense" variant="outlined" color="secondary" fullWidth={true} onClick={handleUploadProfilePic}>
                                 Upload Profile Image
