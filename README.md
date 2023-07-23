@@ -1,14 +1,14 @@
 *Instagram-Clone
 *Features
    * Reels
-    *Posts
+   * Posts
    * Sign In
    * Sign Up
    * Sign Out
 Made using 
    *Firebase
        * firestore
-        *authentication
+       * authentication
        * storage
 ![Login](https://github.com/rohan9521/InstagramReelsClone/assets/43091846/769df0f2-d1c5-4884-916e-86d2145bec57)
 ![signup](https://github.com/rohan9521/InstagramReelsClone/assets/43091846/893d956f-e348-436d-a5a8-33ac8c608d4f)
