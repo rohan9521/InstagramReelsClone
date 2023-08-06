@@ -4,10 +4,12 @@ import Avatar from '@mui/material/Avatar';
 import { database } from '../firebase/FirebaseSetup'
 import CircularProgress from '@mui/material/CircularProgress';
 import './Profile.css'
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Reels from '../../components/feed/feedComponents/Reels';
-import Like from '../../components/feed/feedComponents/Like';
-import Comments from '../../components/feed/feedComponents/Comments';
+import UserList from './userList/UserList';
+import UserReels from './userReels/UserReels';
 
 function Profile() {
   const { id } = useParams()
@@ -15,7 +17,7 @@ function Profile() {
   const [posts, setPosts] = useState([])
   let getReels = async () => {
 
-    if (user != null && user.postIds.length!=0) {
+    if (user != null && user.postIds.length != 0) {
       let posts = []
       await user.postIds.forEach(async (element) => {
         await database.posts.doc(element).get().then((postDoc) => {
@@ -28,6 +30,11 @@ function Profile() {
     }
 
   }
+  const [tabName, setTabName] = React.useState('followers');
+
+  const handleChange = (event, tabName) => {
+    setTabName(tabName);
+  };
   useEffect(() => {
     database.users.doc(id).onSnapshot((doc) => {
       setUser(doc.data())
@@ -39,6 +46,28 @@ function Profile() {
   useEffect(() => {
     getReels()
   }, [user])
+
+  let showSwitch = (tabNamevalue) => {
+    switch (tabNamevalue) {
+      case "posts":
+        return <UserReels posts={posts} user={user}/>
+
+      case "reels":
+        return console.log("reels")
+
+      case "followers":{
+        console.log("followers"+tabName)
+        return <UserList userList={user.followers} type={"followers"} />
+      }
+      case "following":{
+        console.log("following"+tabName)
+        return <UserList userList={user.following} type={"following"}/>
+      }
+      default:
+        return <></>
+      
+    }
+  }
 
   return (
     <div>
@@ -55,38 +84,47 @@ function Profile() {
               <div className='user-data'>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <h4 style={{ padding: '0', margin: '0' }}>{user.fullname}</h4>
-                  <Button style={{ marginLeft: '40%', height: '10%' }}>Edit Profile</Button>
+                  <Button style={{ marginLeft: '25 %', height: '10%' }}>Edit Profile</Button>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <h4>Posts : {posts.length}</h4>
-                  {/* <h4>followers</h4>
-                  <h4>following</h4> */}
+                  <h4> {posts.length} Posts</h4>
+                  <h4 style={{ marginLeft: '5%' }}> {user.followers.length} followers</h4>
+                  <h4 style={{ marginLeft: '5%' }}> {user.following.length} following </h4>
+                </div>
+                <div>
+                  {user.description}
+                </div>
+                <div>
+                  <Button>Follow</Button>
                 </div>
               </div>
             </div>
-            <hr style={{ marginTop: '3rem', marginBottom: '3rem' }} />
 
+            <hr style={{ marginTop: '1rem', marginBottom: '1rem' }} />
+            <Box sx={{ width: '100%' }}>
+              <Tabs
+                value={tabName}
+                onChange={handleChange}
+                textColor="secondary"
+                indicatorColor="secondary"
+                aria-label="secondary tabs example"
+                style={{display:'flex',justifyContent:'space-evenly'}}
+              >
+                
+                <Tab value="posts" label="Posts" />
+                <Tab style={{ marginLeft: '20%' }} value="reels" label="Reels" />
+                <Tab style={{ marginLeft: '20%' }} value="followers" label="Followers" />
+                <Tab style={{ marginLeft: '20%' }} value="following" label="Following" />
+              </Tabs>
+            </Box>
             <div className='reels-container'>
-
-              {
-                posts.map((post) => (
-                  <div key={post.index} style={{ height: '20vh' }}>
-                    {console.log("postindex" + post.index)}
-                    <div className='video-frame-profile'>
-                      <Reels style={{ height: '100%', borderRadius: '20px' }} video={post.postData.pUrl} />
-                      <div style={{ display: 'flex', alignContent: 'center', position: 'absolute', bottom: '5%', left: '5%' }}>
-                        <Comments post={post.postData} user={user} postId={post.index} className='comments-styling-profile' />
-                      </div>
-                    </div>
-                  </div>
-                ))
-              }
+            {showSwitch(tabName)}
             </div>
           </div>
           :
           <CircularProgress color="secondary" />
       }
-    </div>
+    </div >
   )
 }
 
