@@ -67,7 +67,9 @@ function SignUp() {
                         fullname:fullName,
                         profileUrl:url,
                         postIds:[],
-                        createdAt:database.getTimeStamp()
+                        createdAt:database.getTimeStamp(),
+                        followers:[],
+                        following:[]
                     })    
                 })
                 .then(()=>{

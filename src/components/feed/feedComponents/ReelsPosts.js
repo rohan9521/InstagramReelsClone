@@ -9,12 +9,12 @@ import Like from './Like';
 import Comments from './Comments';
 
 
-function Posts(props) {
+function ReelsPosts(props) {
     console.log("propsfromPosts"+JSON.stringify(props))
     const [posts, setPosts] = useState('')
     const { user } = useContext(AuthContextProvider)
     const [loading, setLoading] = useState(true)
-
+    console.log("userFromProfile"+JSON.stringify(user))
     useEffect(() => {
         let parr = []
         database.posts.orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
@@ -61,4 +61,4 @@ function Posts(props) {
     )
 }
 
-export default Posts
+export default ReelsPosts

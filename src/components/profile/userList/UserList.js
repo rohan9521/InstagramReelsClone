@@ -3,12 +3,16 @@ import { database } from '../../firebase/FirebaseSetup'
 import { Avatar, Button } from '@mui/material'
 import './UserList.css'
 function UserList(props) {
-    const [userList, setUserList] = useState([])
-    console.log(props.type)
+    console.log("sameComponent told ya")
+    const [userList, setUserList] = useState([])   
+   
     let loadUsers = async () => {
         let userArr = []
-        for (let i = 0; i < props.userList.length; i++) {
-            let userId = props.userList[i]
+        
+        for(const key of props.userList.keys()){
+            let userId =key
+            console.log(userId   )
+            
             await database.users.doc(userId).get().then((user) => {
                 console.log("UserData" + JSON.stringify(user.data()))
                 userArr.push(user.data())
@@ -18,9 +22,17 @@ function UserList(props) {
         console.log(JSON.stringify(JSON.stringify(userArr)))
         setUserList(userArr)
     }
+
     useEffect(() => {
         loadUsers()
-    }, [])
+    }, [props.userList])
+
+    let handleFollowUnfollow = (userInList)=>{
+        console.log("UserJSON"+JSON.stringify(props))
+        if(props.type == "followers" && props.followingMap.has(userInList.userId))
+            return "unfollow"
+        return "follow"
+    }
 
     return (
         <div style={{ width: '100%', display: 'flex',flexDirection:'column', alignItems: 'center' }}>
@@ -40,7 +52,7 @@ function UserList(props) {
 
                             </div>
                             {console.log(JSON.stringify(user))}
-                            <Button style={{ height: '30%', color: 'black',marginLeft:'2%' }} variant="outlined">Follow</Button>
+                            <Button style={{ height: '30%', color: 'black',marginLeft:'2%' }} variant="outlined">{handleFollowUnfollow(user)}</Button>
                         </div>
                     </div>
                 ))

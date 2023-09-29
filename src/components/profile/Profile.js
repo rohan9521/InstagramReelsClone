@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import { database } from '../firebase/FirebaseSetup'
@@ -10,16 +10,18 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import UserList from './userList/UserList';
 import UserReels from './userReels/UserReels';
-
+import { AuthContextProvider } from '../context/AuthProvider';
 function Profile() {
   const { id } = useParams()
-  const [user, setUser] = useState(null)
+  const [userData, setUser] = useState(null)
   const [posts, setPosts] = useState([])
-  let getReels = async () => {
+  const {user,followersMap,followingMap} = useContext(AuthContextProvider)
 
-    if (user != null && user.postIds.length != 0) {
+  console.log("userFromProfile"+JSON.stringify(user))
+  let getReels = async () => {
+    if (userData != null && userData.postIds.length != 0) {
       let posts = []
-      await user.postIds.forEach(async (element) => {
+      await userData.postIds.forEach(async (element) => {
         await database.posts.doc(element).get().then((postDoc) => {
           console.log("postsDOC" + JSON.stringify(postDoc.data()))
           posts.push({ postData: { ...postDoc.data() }, index: postDoc.id })
@@ -45,23 +47,23 @@ function Profile() {
 
   useEffect(() => {
     getReels()
-  }, [user])
+  }, [userData])
 
   let showSwitch = (tabNamevalue) => {
     switch (tabNamevalue) {
       case "posts":
-        return <UserReels posts={posts} user={user}/>
+        return <UserReels posts={posts} user={userData}/>
 
       case "reels":
         return console.log("reels")
 
       case "followers":{
         console.log("followers"+tabName)
-        return <UserList userList={user.followers} type={"followers"} />
+        return <UserList userList={followersMap} followingMap={followingMap} type={"followers"} user={user}/>
       }
       case "following":{
-        console.log("following"+tabName)
-        return <UserList userList={user.following} type={"following"}/>
+        console.log("following  "+tabName)
+        return <UserList userList={followingMap}  type={"following"} />
       }
       default:
         return <></>
@@ -72,27 +74,27 @@ function Profile() {
   return (
     <div>
       {
-        user != null ?
+        userData != null ?
           <div className='profile-container'>
             <div className='profile-details'>
               <div className='user-avatar'>
                 <Avatar
-                  src={user.profileUrl}
+                  src={userData.profileUrl}
                   sx={{ width: 150, height: 150 }}
                 />
               </div>
               <div className='user-data'>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <h4 style={{ padding: '0', margin: '0' }}>{user.fullname}</h4>
+                  <h4 style={{ padding: '0', margin: '0' }}>{userData.fullname}</h4>
                   <Button style={{ marginLeft: '25 %', height: '10%' }}>Edit Profile</Button>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <h4> {posts.length} Posts</h4>
-                  <h4 style={{ marginLeft: '5%' }}> {user.followers.length} followers</h4>
-                  <h4 style={{ marginLeft: '5%' }}> {user.following.length} following </h4>
+                  <h4 style={{ marginLeft: '5%' }}> {userData.followers.length} followers</h4>
+                  <h4 style={{ marginLeft: '5%' }}> {userData.following.length} following </h4>
                 </div>
                 <div>
-                  {user.description}
+                  {userData.description}
                 </div>
                 <div>
                   <Button>Follow</Button>
