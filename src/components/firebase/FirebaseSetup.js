@@ -5,6 +5,7 @@ import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/storage'
 import 'firebase/compat/firestore'
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -31,5 +32,6 @@ export const database = {
   users: firestore.collection('users'),
   posts:firestore.collection('posts'),
   comments:firestore.collection('comments'),
-  getTimeStamp: firebase.firestore.FieldValue.serverTimestamp
+  getTimeStamp: firebase.firestore.FieldValue.serverTimestamp,
+  firestore: firestore
 }

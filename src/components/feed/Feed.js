@@ -4,7 +4,7 @@ import { AuthContextProvider } from '../context/AuthProvider'
 import LinearProgress from '@mui/material/LinearProgress';
 import Button from '@mui/material/Button';
 import UploadFile from './feedComponents/UploadFile';
-import Posts from './feedComponents/Posts';
+import ReelsPosts from './feedComponents/ReelsPosts';
 import Navbar from './feedComponents/Navbar';
 
 function Feed() {
@@ -13,10 +13,10 @@ function Feed() {
 
   return (
   
-    <div >
+    <div>
         <UploadFile user={user} />
-        <Posts user={user} />
-      </div> 
+        <ReelsPosts user={user} />
+    </div> 
 
   )
 }

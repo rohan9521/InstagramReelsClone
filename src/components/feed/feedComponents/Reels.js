@@ -20,7 +20,7 @@ function Reels(props) {
   }
     return (
  
-        <video className='video' src={props.video}  onClick={handleClick} controls={false} onEnded={(e)=>{handleScroll(e)}}>
+        <video className='video'  muted="muted" src={props.video}  onClick={handleClick} controls={false} onEnded={(e)=>{handleScroll(e)}}>
 
         </video>
  

@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import SendIcon from '@mui/icons-material/Send';
 import Toolbar from '@mui/material/Toolbar';
+import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
@@ -138,7 +140,15 @@ export default function Navbar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-
+      <MenuItem>
+        <IconButton
+          size="large"
+          color="inherit"
+          onClick={handleGotoFeedPage}>
+          <HomeIcon />
+        </IconButton>
+        <p>home</p>
+      </MenuItem>
       <MenuItem>
         <IconButton
           size="large"
@@ -170,9 +180,38 @@ export default function Navbar(props) {
           <div >
             <img height="50em" src={Instagram} />
           </div>
+          <Search 
+            style={{
+              border:'solid black 1px'
+            }}
+          >
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+             style={{
+              color:'black'
+            }}
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
           <Box sx={{ flexGrow: 1 }} />
+    
           <Box sx={{ display: { xs: 'none', md: 'flex', color: 'black' } }}>
-
+          
+            <IconButton
+              size="large"
+              color="inherit"
+              onClick={handleGotoFeedPage}>
+              <HomeIcon />
+            </IconButton>
+            <IconButton
+              size="large"
+              color="inherit"
+              onClick={handleGotoFeedPage}>
+              <SendIcon />
+            </IconButton>
             <IconButton
               size="large"
               color="inherit"
