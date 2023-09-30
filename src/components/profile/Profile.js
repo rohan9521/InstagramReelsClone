@@ -63,7 +63,7 @@ function Profile() {
       }
       case "following":{
         console.log("following  "+tabName)
-        return <UserList userList={followingMap}  type={"following"} />
+        return <UserList userList={followingMap} followingMap={followingMap} type={"following"} user={user}/>
       }
       default:
         return <></>
