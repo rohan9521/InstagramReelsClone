@@ -29,7 +29,32 @@ function ReelsPosts(props) {
         })
     }, [])
 
+    let callBack = (elements) => {
+        elements.forEach((entery) => {
+            let videoEle = entery.target.childNodes[0]
+            console.log("observer" + videoEle)
+            videoEle
+                .play()
+                .then(()=>{
+                    if(!videoEle.paused && !entery.isIntersecting){
+                        videoEle.pause()
+                    }
+                })
 
+        })
+    }
+
+    let interSectionObserver = new IntersectionObserver(callBack, { threshold: 0.6 })
+    useEffect(()=>{
+        const reelsContainer = document.querySelectorAll('.video-frame')
+        reelsContainer.forEach((element) => {
+            console.log(element)
+            interSectionObserver.observe(element)
+        })
+        return ()=>{
+            interSectionObserver.disconnect()
+        }
+    },[posts])
     return (
 
         <div className='container'>
