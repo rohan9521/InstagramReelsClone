@@ -24,6 +24,7 @@ import '../feedComponents/css/Navbar.css'
 import Instagram from '../../../Assets/Instagram.JPG'
 import Avatar from '@mui/material/Avatar';
 import ExploreIcon from '@mui/icons-material/Explore';
+import AddIcon from '@mui/icons-material/Add';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -91,6 +92,9 @@ export default function Navbar(props) {
 
   const handleGotoFeedPage = () => {
     navigate('/')
+  }
+  const handleHome = () => {
+    navigate('/home')
   }
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -203,7 +207,7 @@ export default function Navbar(props) {
             <IconButton
               size="large"
               color="inherit"
-              onClick={handleGotoFeedPage}>
+              onClick={handleHome}>
               <HomeIcon />
             </IconButton>
             <IconButton
@@ -211,6 +215,12 @@ export default function Navbar(props) {
               color="inherit"
               onClick={handleGotoFeedPage}>
               <SendIcon />
+            </IconButton>
+            <IconButton
+              size="large"
+              color="inherit"
+              onClick={handleGotoFeedPage}>
+              <AddIcon />
             </IconButton>
             <IconButton
               size="large"
