@@ -18,6 +18,7 @@ function ContentPostView(props) {
   return (
     <div
       style={{
+        marginBottom:'5%',
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
       }}
     >
@@ -60,13 +61,12 @@ function ContentPostView(props) {
             height:'3%',
             display: 'flex',
             justifyContent: 'start',
-            backgroundColor: 'gray',
             alignItems:'center',
             borderRadius:'15px',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
  
           }}>
-          <Like style={{ marginLeft: '1%' }} className='like-styling' postData={props.postData} userData={props.user} postId={props.postId} />
+          <Like  style={{ marginLeft: '1%' }} className='like-styling' postData={props.postData} userData={props.user} postId={props.postId} />
           <Comments style={{ marginLeft: '1%' }} post={props.postData} user={props.user} postId={props.postId} className='comments-styling' />
         </CardContent>
 

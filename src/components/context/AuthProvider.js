@@ -8,6 +8,7 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
     const [authUser, setAuthUser] = useState(null)
     const [loading, setLoading] = useState(false)
+ 
     const [followersMap, setFollowersMap] = useState(new Map())
     const [followingMap, setFollowingMap] = useState(new Map())
 
@@ -21,7 +22,6 @@ export function AuthProvider({ children }) {
     let signOut = () => {
         return auth.signOut();
     }
-
 
     useEffect(() => {
         const unsub = auth.onAuthStateChanged((user) => {
@@ -91,7 +91,8 @@ export function AuthProvider({ children }) {
         signOut,
         user,
         followingMap,
-        followersMap
+        followersMap,
+    
     }
 
     return (

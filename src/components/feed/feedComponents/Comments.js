@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import ChatIcon from '@mui/icons-material/Chat';
+import InsertCommentOutlinedIcon from '@mui/icons-material/InsertCommentOutlined';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import Reels from './Reels'
 import Avatar from '@mui/material/Avatar';
 import './css/Comments.css'
@@ -83,7 +80,7 @@ function Comments(props) {
 
     return (
         <div>
-            <ChatIcon style={{ color: 'white' }} onClick={handleClickOpen} />
+            <InsertCommentOutlinedIcon style={{ color: 'black' }} onClick={handleClickOpen} />
             <Dialog
                 open={open}
                 onClose={handleClose}

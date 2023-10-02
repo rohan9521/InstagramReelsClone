@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {  useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -68,12 +68,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Navbar(props) {
   const navigate = useNavigate()
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -84,6 +83,9 @@ export default function Navbar(props) {
   const handleGotoProfile = () => {
     navigate(`/profile/${props.userId}`)
     handleMenuClose()
+  }
+  const handleAddPost = ()=>{
+    props.setOpenModal(!props.openModal)
   }
 
   const handleLogout = () => {
@@ -148,7 +150,7 @@ export default function Navbar(props) {
         <IconButton
           size="large"
           color="inherit"
-          onClick={handleGotoFeedPage}>
+          onClick={handleHome}>
           <HomeIcon />
         </IconButton>
         <p>home</p>
@@ -161,6 +163,15 @@ export default function Navbar(props) {
           <ExploreIcon />
         </IconButton>
         <p>Explore</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          color="inherit"
+          onClick={handleAddPost}>
+          <AddIcon />
+        </IconButton>
+        <p>Create Post</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -219,7 +230,7 @@ export default function Navbar(props) {
             <IconButton
               size="large"
               color="inherit"
-              onClick={handleGotoFeedPage}>
+              onClick={handleAddPost}>
               <AddIcon />
             </IconButton>
             <IconButton
@@ -253,9 +264,11 @@ export default function Navbar(props) {
             </IconButton>
           </Box>
         </Toolbar>
+       
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+     
     </Box >
   );
 }
