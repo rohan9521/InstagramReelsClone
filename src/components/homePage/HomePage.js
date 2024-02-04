@@ -5,10 +5,12 @@ import { AuthContextProvider } from '../context/AuthProvider'
 import { database } from '../firebase/FirebaseSetup'
 import './HomePage.css'
 import CircularProgress from '@mui/material/CircularProgress';
+import AddContentPost from '../feed/contentPosts/AddContentPost'
 
 function HomePage() {
     const { signOut, authUser } = useContext(AuthContextProvider)
     const [user, setUser] = useState(null)
+    const [openAddPostModal,setOpenAddPostModal] = useState(false)
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         if (authUser != null) {
@@ -28,9 +30,12 @@ function HomePage() {
             {
                 user != null ?
                     <>
-                        <Navbar signOut={signOut} profileImageUrl={user.profileUrl} userId={user.userId} />
+                        <Navbar signOut={signOut} profileImageUrl={user.profileUrl} userId={user.userId} openModal={openAddPostModal} setOpenModal={setOpenAddPostModal} />
                         <div className='child-container'>
+                        <AddContentPost openModal={openAddPostModal} setOpenModal={setOpenAddPostModal} user={user}/>
                             <Outlet context={[user]} />
+                            {console.log(openAddPostModal)}
+                          
                         </div>
 
                     </> :

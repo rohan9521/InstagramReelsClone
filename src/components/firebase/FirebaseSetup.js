@@ -33,5 +33,6 @@ export const database = {
   posts:firestore.collection('posts'),
   comments:firestore.collection('comments'),
   getTimeStamp: firebase.firestore.FieldValue.serverTimestamp,
-  firestore: firestore
+  firestore: firestore,
+  contentPost : firestore.collection('contentpost')
 }

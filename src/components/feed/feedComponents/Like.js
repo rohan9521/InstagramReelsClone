@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import './css/Like.css'
 import { database } from '../../firebase/FirebaseSetup'
 
 function Like({ postData, postId, userData }) {
-   
     const [liked, setLiked] = useState(false)
     console.log(liked)
     let handleClick = async () => {
         let likedUserArr = []
-
         if (liked == true)
             likedUserArr = postData.likes.filter((userId) => (userId != userData.userId))
         else
@@ -29,7 +27,7 @@ function Like({ postData, postId, userData }) {
 
     return (
         <div>
-            {liked ? <FavoriteIcon onClick={handleClick} className='like' /> : <FavoriteIcon onClick={handleClick} className='un-like' />
+            {liked ? <FavoriteBorderOutlinedIcon style={{color:'black'}} onClick={handleClick} className='like' /> : <FavoriteBorderOutlinedIcon style={{color:'black'}} onClick={handleClick} className='un-like' />
             }
         </div>
     )
