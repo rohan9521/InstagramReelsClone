@@ -16,21 +16,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContextProvider } from '../context/AuthProvider'
 import { storage, database } from '../firebase/FirebaseSetup';
 import { useFormik } from 'formik';
+import { useUserSignUp } from 'hooks/useUserSignUp';
 
 function SignUp() {
-    const formikObj = useFormik({
-        initialValues: {
-            name: "",
-            password: "",
-            email: "",
-            imageFile: null
-        },
-        onSubmit: (values) => {
-            console.log("values"+JSON.stringify(values))
-
-        }
-    })
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [fullName, setFullName] = useState('')
@@ -40,6 +28,27 @@ function SignUp() {
     const { signUp, setCurrUser } = useContext(AuthContextProvider)
     const navigate = useNavigate()
     const inputRef = useRef()
+    const {mutate} = useUserSignUp()
+    const formikObj = useFormik({
+        initialValues: {
+            name: "",
+            password: "",
+            email: "",
+            imageFile: null
+        },
+        onSubmit: (values) => {
+            console.log("values"+JSON.stringify(values))
+            let user = {
+                fullName,
+                password,
+                email,
+                file
+            }
+            mutate(user)
+        }
+    })
+
+   
     const styles = ({
         text1: {
             color: 'grey',
